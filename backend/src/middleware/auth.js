@@ -5,7 +5,13 @@ const User = require("../models/User");
 
 async function requireAuth(req, res, next) {
   try {
-    const token = req.cookies[env.cookieName];
+    const authHeader = req.headers.authorization;
+    const bearerToken =
+      authHeader && authHeader.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : null;
+
+    const token = req.cookies[env.cookieName] || bearerToken;
     if (!token) return next(ApiError.unauthorized());
 
     const payload = verifyToken(token);

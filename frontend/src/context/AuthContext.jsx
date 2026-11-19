@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
       setUser(user);
     } catch {
       setUser(null);
+      localStorage.removeItem("arr_token");
     } finally {
       setLoading(false);
     }
@@ -25,13 +26,17 @@ export function AuthProvider({ children }) {
   }, [refresh]);
 
   const login = useCallback(async (credentials) => {
-    const { user } = await authApi.login(credentials);
+    const data = await authApi.login(credentials);
+    const { user, token } = data;
+    if (token) localStorage.setItem("arr_token", token);
     setUser(user);
     return user;
   }, []);
 
   const register = useCallback(async (payload) => {
-    const { user } = await authApi.register(payload);
+    const data = await authApi.register(payload);
+    const { user, token } = data;
+    if (token) localStorage.setItem("arr_token", token);
     setUser(user);
     return user;
   }, []);
@@ -46,6 +51,7 @@ export function AuthProvider({ children }) {
     try {
       await authApi.logout();
     } finally {
+      localStorage.removeItem("arr_token");
       setUser(null);
       queryClient.clear();
     }
