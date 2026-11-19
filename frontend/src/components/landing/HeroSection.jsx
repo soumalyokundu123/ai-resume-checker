@@ -1,31 +1,34 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Play, Sparkles, ShieldCheck } from "lucide-react";
+import { ArrowRight, Play, Sparkles, ShieldCheck, CheckCircle2, Zap } from "lucide-react";
 import { DarkPanel } from "./DarkPanel";
-import { HeroDashboardPreview } from "./HeroDashboardPreview";
+import { Hero3DResume } from "./Hero3DResume";
 
 export function HeroSection() {
   return (
-    <section className="relative w-full">
+    <section className="relative w-full overflow-hidden">
       <DarkPanel
-        className="w-full min-h-[760px] lg:min-h-[820px]"
+        className="w-full min-h-[780px] lg:min-h-[860px]"
         radius="rounded-b-[40px] sm:rounded-b-[56px]"
       >
         <div
-          className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-10 items-center px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 lg:pt-40 pb-16 lg:pb-24"
-          style={{ maxWidth: 1280, marginLeft: "auto", marginRight: "auto" }}
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-8 items-center px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 lg:pt-40 pb-16 lg:pb-24"
+          style={{ maxWidth: 1320, marginLeft: "auto", marginRight: "auto" }}
         >
           {/* Copy */}
-          <div className="text-white">
+          <div className="text-white relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/8 border border-white/10 backdrop-blur-md"
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-emerald-500/30 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.15)]"
             >
-              <Sparkles size={12} className="text-[#B6CFC0]" />
-              <span className="text-[11px] tracking-wide text-white/85 uppercase font-semibold">
-                Now scoring against ATS 2026 criteria
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="text-[11px] tracking-wider text-emerald-300 uppercase font-bold">
+                Next-Gen ATS Parser &bull; Gemini 2.5
               </span>
             </motion.div>
 
@@ -33,21 +36,12 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className="font-display text-[48px] sm:text-[64px] lg:text-[80px] leading-[0.98] tracking-tight mt-7"
+              className="font-display text-[46px] sm:text-[62px] lg:text-[76px] leading-[1.02] tracking-tight mt-6"
             >
               Beat the ATS.
               <br />
-              <span className="text-white/50">Land more</span>{" "}
-              <span
-                style={{
-                  backgroundImage:
-                    "linear-gradient(120deg, #B6CFC0 0%, #8FB39C 55%, #5B7C6A 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  color: "transparent",
-                }}
-              >
+              <span className="text-zinc-400">Land 3x more</span>{" "}
+              <span className="bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-300 bg-clip-text text-transparent font-bold">
                 interviews.
               </span>
             </motion.h1>
@@ -56,70 +50,81 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15 }}
-              className="text-white/65 text-base sm:text-lg lg:text-[19px] mt-6 max-w-[540px] leading-relaxed"
+              className="text-zinc-300 text-base sm:text-lg lg:text-[18px] mt-6 max-w-[560px] leading-relaxed"
             >
-              Upload your resume. Get an instant ATS score, fixable issues, and AI-rewritten bullets
-              that actually sound like you — built for engineers, by engineers.
+              Upload your resume for real-time parsing against Greenhouse and Lever algorithms.
+              Get quantifiable impact scores, identify missing keywords, and rewrite weak bullets
+              with surgical precision.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
-              className="flex flex-wrap items-center gap-3 mt-8"
+              className="flex flex-wrap items-center gap-3.5 mt-8"
             >
               <Link
                 to="/register"
-                className="group relative inline-flex items-center gap-2 h-12 px-5 rounded-full font-semibold text-[14px] text-white shadow-[0_10px_30px_-8px_rgba(143,179,156,0.5)] transition-all hover:shadow-[0_14px_36px_-8px_rgba(143,179,156,0.7)] active:scale-[0.98]"
+                className="group relative inline-flex items-center gap-2.5 h-13 px-6 rounded-full font-semibold text-[14px] text-white shadow-[0_12px_32px_rgba(16,185,129,0.35)] hover:shadow-[0_16px_40px_rgba(16,185,129,0.5)] transition-all active:scale-[0.98]"
                 style={{
                   background:
-                    "linear-gradient(135deg, #8FB39C 0%, #5B7C6A 55%, #2F4A3A 100%)",
+                    "linear-gradient(135deg, #10B981 0%, #059669 60%, #047857 100%)",
                 }}
               >
                 <span
                   className="absolute inset-0 rounded-full pointer-events-none"
                   style={{
                     background:
-                      "linear-gradient(180deg, rgba(255,255,255,0.22) 0%, transparent 50%)",
+                      "linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 60%)",
                   }}
                 />
-                <span className="relative">Upload your resume</span>
-                <ArrowRight size={15} className="relative group-hover:translate-x-0.5 transition-transform" />
+                <span className="relative flex items-center gap-2">
+                  <Zap size={16} className="text-emerald-100 fill-emerald-100" />
+                  Roast My Resume Free
+                </span>
+                <ArrowRight size={15} className="relative group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <a
                 href="#how-it-works"
-                className="inline-flex items-center gap-2 h-12 px-5 rounded-full font-medium text-[14px] text-white bg-white/8 border border-white/12 backdrop-blur-md hover:bg-white/12 transition-colors"
+                className="inline-flex items-center gap-2 h-13 px-5 rounded-full font-medium text-[14px] text-zinc-200 bg-white/[0.05] border border-white/10 backdrop-blur-md hover:bg-white/[0.1] hover:text-white transition-all"
               >
                 <Play size={13} fill="currentColor" />
-                See how it works
+                Watch 60s Demo
               </a>
             </motion.div>
 
+            {/* Metrics Trust Strip */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8 text-[12px] text-white/55"
+              className="grid grid-cols-3 gap-4 pt-8 mt-8 border-t border-white/10 max-w-[500px]"
             >
-              <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck size={13} className="text-[#8FB39C]" />
-                No credit card required
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-1 w-1 rounded-full bg-white/30" />
-                Free ATS analysis
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-1 w-1 rounded-full bg-white/30" />
-                47,300+ resumes analyzed
-              </span>
+              <div>
+                <div className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  89.4%
+                </div>
+                <div className="text-xs text-zinc-400 mt-0.5">Average ATS Pass Rate</div>
+              </div>
+              <div>
+                <div className="font-display text-xl sm:text-2xl font-bold text-emerald-400 tracking-tight">
+                  3.2x
+                </div>
+                <div className="text-xs text-zinc-400 mt-0.5">More Recruiter Calls</div>
+              </div>
+              <div>
+                <div className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  &lt; 10s
+                </div>
+                <div className="text-xs text-zinc-400 mt-0.5">Instant Deep Analysis</div>
+              </div>
             </motion.div>
           </div>
 
-          {/* Visual */}
-          <div className="relative">
-            <HeroDashboardPreview />
+          {/* Interactive 3D Scanner Column */}
+          <div className="relative flex items-center justify-center">
+            <Hero3DResume />
           </div>
         </div>
       </DarkPanel>

@@ -154,29 +154,49 @@ export default function ResumeDetail() {
               onChange={setActiveVersionId}
             />
           </div>
-          <div className="flex items-center gap-3 flex-1 min-w-[280px] max-w-[520px]">
-            <Input
-              placeholder="Target role (optional, e.g. Senior Frontend Engineer)"
-              value={targetRole}
-              onChange={(e) => setTargetRole(e.target.value)}
-            />
-            <Button
-              variant="accent"
-              size="lg"
-              onClick={runAnalyze}
-              disabled={analyze.isPending || !activeVersionId}
-              className="shrink-0"
-            >
-              {analyze.isPending ? (
-                <>
-                  <Loader2 size={14} className="animate-spin" /> Analyzing…
-                </>
-              ) : (
-                <>
-                  <Sparkles size={14} /> Analyze
-                </>
-              )}
-            </Button>
+          <div className="space-y-2 flex-1 min-w-[280px] max-w-[560px]">
+            <div className="flex items-center gap-3">
+              <Input
+                placeholder="Target role (e.g. Full Stack Engineer, ML Engineer)"
+                value={targetRole}
+                onChange={(e) => setTargetRole(e.target.value)}
+              />
+              <Button
+                variant="accent"
+                size="lg"
+                onClick={runAnalyze}
+                disabled={analyze.isPending || !activeVersionId}
+                className="shrink-0 font-semibold shadow-sm"
+              >
+                {analyze.isPending ? (
+                  <>
+                    <Loader2 size={15} className="animate-spin" /> Analyzing…
+                  </>
+                ) : (
+                  <>
+                    <Sparkles size={15} /> Analyze
+                  </>
+                )}
+              </Button>
+            </div>
+            {/* Quick role suggestions */}
+            <div className="flex flex-wrap items-center gap-1.5 pt-1">
+              <span className="text-[11px] text-[var(--ink-muted)] font-medium">Quick target:</span>
+              {["Full-Stack Engineer", "Backend Developer", "Frontend SWE", "DevOps / Cloud"].map((role) => (
+                <button
+                  key={role}
+                  type="button"
+                  onClick={() => setTargetRole(role)}
+                  className={`text-[11px] px-2.5 py-0.5 rounded-full border transition-all ${
+                    targetRole === role
+                      ? "bg-[var(--accent-strong)] text-white border-[var(--accent-strong)]"
+                      : "bg-[var(--surface-2)] text-[var(--ink-muted)] border-[var(--border)] hover:border-[var(--accent)]/50"
+                  }`}
+                >
+                  {role}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         {analyze.error && (

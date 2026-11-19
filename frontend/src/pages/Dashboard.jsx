@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/Card";
 import { useAuth } from "@/context/AuthContext";
 import { useDashboard } from "@/hooks/useDashboard";
+import { UploadDropzone } from "@/components/resume/UploadDropzone";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -48,16 +49,23 @@ export default function Dashboard() {
 
   if (!totals?.resumes) {
     return (
-      <EmptyState
-        icon={UploadCloud}
-        title="Welcome — let's roast your resume"
-        description="Upload a PDF to get an instant ATS score, fixable issues, your strengths, and AI-rewritten bullets."
-        action={
-          <Button variant="accent" size="lg" onClick={() => nav("/resumes")}>
-            Upload your first resume
-          </Button>
-        }
-      />
+      <div className="max-w-2xl mx-auto space-y-6 pt-6 pb-12">
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)] text-xs font-semibold">
+            <Sparkles size={13} />
+            Instant ATS & Gemini 2.5 Analysis
+          </div>
+          <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[var(--ink)]">
+            Welcome, {user?.name?.split(" ")[0] || "Engineer"}
+          </h1>
+          <p className="text-sm text-[var(--ink-muted)] max-w-md mx-auto">
+            Upload your resume PDF to unlock your ATS readiness score, identify missing keywords, and get surgical AI rewrites.
+          </p>
+        </div>
+        <Card className="p-6 shadow-card">
+          <UploadDropzone onUploaded={(resume) => nav(`/resumes/${resume._id}`)} />
+        </Card>
+      </div>
     );
   }
 
@@ -72,7 +80,48 @@ export default function Dashboard() {
   const evolutionDelta = current != null && first != null ? current - first : 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-12">
+      {/* Personalized Welcome Banner & Quick Actions */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 sm:p-6 rounded-3xl bg-[var(--surface)] border border-[var(--border)] shadow-card">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--accent-strong)] bg-[var(--accent-soft)] px-2.5 py-0.5 rounded-full">
+              Overview
+            </span>
+            <span className="text-xs text-[var(--ink-muted)]">
+              {new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}
+            </span>
+          </div>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[var(--ink)] mt-1.5">
+            Welcome back, {user?.name?.split(" ")[0] || "Engineer"}
+          </h1>
+          <p className="text-xs sm:text-sm text-[var(--ink-muted)] mt-1">
+            {latestResume
+              ? `Active: "${latestResume.title}" (Version V${latestResume.latestVersionNumber || 1})`
+              : "Track your ATS score evolution and optimize resume versions."}
+          </p>
+        </div>
+        <div className="flex items-center gap-2.5 shrink-0">
+          <Button
+            variant="outline"
+            size="md"
+            onClick={() => nav("/insights")}
+            className="hidden sm:inline-flex"
+          >
+            <Lightbulb size={14} className="text-amber-500" />
+            Insights
+          </Button>
+          <Button
+            variant="accent"
+            size="md"
+            onClick={() => nav("/resumes")}
+            className="shadow-sm"
+          >
+            <UploadCloud size={15} />
+            Upload Resume
+          </Button>
+        </div>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <StatCard
           label="ATS Score"

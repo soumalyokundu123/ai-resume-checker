@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Geist:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @theme {
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Geist", "Inter", sans-serif;
-  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Geist", "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -26,48 +26,47 @@
 
 :root,
 [data-theme="light"] {
-  --bg: #f4f4f0;
-  --surface: #ffffff;
-  --surface-2: #fafaf7;
-  --border: rgba(15, 17, 21, 0.08);
-  --ink: #0f1115;
-  --ink-muted: #374151;
-  --accent: #5b7c6a;
-  --accent-strong: #2f4a3a;
-  --accent-soft: #e6efe8;
-  --accent-hero: #2f4a3a;
-  --accent-hero-2: #436354;
-  --success: #4a7a5d;
-  --warning: #c28a3a;
-  --danger: #b5564e;
-  --shadow-card: 0 1px 3px rgba(15, 17, 21, 0.04),
-    0 1px 2px rgba(15, 17, 21, 0.03);
-  --shadow-hover: 0 6px 20px rgba(15, 17, 21, 0.06);
+  --bg: #F8FAF9;
+  --surface: #FFFFFF;
+  --surface-2: #F1F5F3;
+  --border: rgba(15, 23, 42, 0.08);
+  --ink: #0F172A;
+  --ink-muted: #475569;
+  --accent: #10B981;
+  --accent-strong: #047857;
+  --accent-soft: #ECFDF5;
+  --accent-hero: #064E3B;
+  --accent-hero-2: #047857;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 6px 16px -4px rgba(15, 23, 42, 0.05);
+  --shadow-hover: 0 12px 32px -4px rgba(15, 23, 42, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
 }
 
 [data-theme="dark"] {
-  --bg: #0f1115;
-  --surface: #16181d;
-  --surface-2: #1b1e24;
+  --bg: #090B0E;
+  --surface: #11141A;
+  --surface-2: #171B22;
   --border: rgba(255, 255, 255, 0.08);
-  --ink: #f8fafc;
-  --ink-muted: #cbd5e1;
-  --accent: #8fb39c;
-  --accent-strong: #b6cfc0;
-  --accent-soft: rgba(143, 179, 156, 0.12);
-  --accent-hero: #1e3024;
-  --accent-hero-2: #2a4234;
-  --success: #8fb39c;
-  --warning: #d4a86a;
-  --danger: #d4847c;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.35);
+  --ink: #F8FAFC;
+  --ink-muted: #94A3B8;
+  --accent: #34D399;
+  --accent-strong: #6EE7B7;
+  --accent-soft: rgba(52, 211, 153, 0.12);
+  --accent-hero: #064E3B;
+  --accent-hero-2: #022C22;
+  --success: #34D399;
+  --warning: #FBBF24;
+  --danger: #F87171;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5), 0 6px 20px -4px rgba(0, 0, 0, 0.6);
+  --shadow-hover: 0 16px 36px -6px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(52, 211, 153, 0.15);
 }
 
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -77,10 +76,93 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "cv11", "ss01";
+  overflow-x: hidden;
 }
 
 * {
   border-color: var(--border);
+}
+
+/* 3D & Premium SaaS Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.perspective-1200 {
+  perspective: 1200px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.glass-card {
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.glass-panel-dark {
+  background: linear-gradient(135deg, rgba(17, 20, 26, 0.85) 0%, rgba(9, 11, 14, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.35);
+}
+
+.glow-emerald-lg {
+  box-shadow: 0 0 80px -15px rgba(16, 185, 129, 0.45);
+}
+
+.grid-bg-dark {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.grid-bg-light {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+
+@keyframes scanLineAnim {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-scan-line {
+  animation: scanLineAnim 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.04); opacity: 1; }
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 4s ease-in-out infinite;
 }
 
 .shadow-card {
@@ -92,11 +174,11 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
-.font-serif {
-  font-family: var(--font-serif);
+.font-mono {
+  font-family: var(--font-mono);
 }
 
 .tabular {
@@ -104,19 +186,22 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.14);
+  background: rgba(148, 163, 184, 0.45);
 }
 [data-theme="dark"] ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.08);
 }
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.16);
 }
