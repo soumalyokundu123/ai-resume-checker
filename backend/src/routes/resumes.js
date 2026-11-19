@@ -13,7 +13,7 @@ const Resume = require("../models/Resume");
 const ResumeVersion = require("../models/ResumeVersion");
 const {analyzeLimiter} = require("../middleware/rateLimit");
 const Analysis = require("../models/Analysis");
-const { analyzeResume } = require("../services/geminiService");
+const { analyzeResume, reconcileKeywords } = require("../services/geminiService");
 const { extractText } = require("../services/pdfService");
 const { parseResume } = require("../services/structuredParser");
 const {diffText,summarize} = require("../services/diffService");
@@ -234,12 +234,30 @@ router.get(
       req.params.versionId
     );
 
-    const analysis = await Analysis.findOne({
+    let analysis = await Analysis.findOne({
       resumeId: resume._id,
       versionId: version._id,
     })
       .sort({ createdAt: -1 })
       .lean();
+
+    if (analysis && version.rawText) {
+      const originalMissingCount = analysis.keywordsMissing?.length || 0;
+      reconcileKeywords(version.rawText, analysis);
+      if ((analysis.keywordsMissing?.length || 0) !== originalMissingCount) {
+        await Analysis.updateOne(
+          { _id: analysis._id },
+          {
+            $set: {
+              keywordsPresent: analysis.keywordsPresent,
+              keywordsMissing: analysis.keywordsMissing,
+              scoreBreakdown: analysis.scoreBreakdown,
+              atsScore: analysis.atsScore,
+            },
+          }
+        ).catch(() => {});
+      }
+    }
 
     res.json({ analysis: analysis || null });
   })
