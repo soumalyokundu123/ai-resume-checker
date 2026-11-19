@@ -14,8 +14,9 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/api": {
-        target: "http://localhost:8000",
+        target: "https://ai-resume-checker-guje.onrender.com",
         changeOrigin: true,
+        secure: false,
       },
     },
   },
